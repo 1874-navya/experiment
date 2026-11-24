@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     llm_base_url: str = "https://api.openai.com/v1"
     llm_model: str = "gpt-4.1-mini"
     llm_timeout_seconds: int = 90
+    cors_origins: str = "http://localhost:3000"
 
     max_upload_mb: int = 25
     max_total_upload_mb: int = 100

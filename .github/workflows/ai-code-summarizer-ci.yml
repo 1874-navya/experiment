@@ -1,0 +1,35 @@
+name: AI Code Summarizer CI
+
+on:
+  push:
+    branches: [feature/ai-code-summarizer]
+    paths:
+      - "ai-code-summarizer/**"
+      - ".github/workflows/ai-code-summarizer-ci.yml"
+  pull_request:
+    paths:
+      - "ai-code-summarizer/**"
+      - ".github/workflows/ai-code-summarizer-ci.yml"
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r ai-code-summarizer/backend/requirements.txt
+      - run: PYTHONPATH=ai-code-summarizer/backend pytest ai-code-summarizer/backend/tests
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - working-directory: ai-code-summarizer/frontend
+        run: npm install
+      - working-directory: ai-code-summarizer/frontend
+        run: NEXT_PUBLIC_API_BASE_URL=http://localhost:8000 npm run build

@@ -7,7 +7,7 @@ import type { AnalysisResult } from "@/lib/api";
 import { getJob, submitAnalysis } from "@/lib/api";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
-const SAMPLE = "from typing import Iterable\n\nclass OrderService:\n    \\"\\"\\"Coordinates checkout and order persistence.\\"\\"\\"\n\n    def __init__(self, repository, payment_gateway):\n        self.repository = repository\n        self.payment_gateway = payment_gateway\n\n    async def place_order(self, customer_id: str, items: Iterable[dict]):\n        order = self.repository.build_order(customer_id, items)\n        payment = await self.payment_gateway.charge(customer_id, order.total)\n        order.payment_id = payment.id\n        return self.repository.save(order)\n";
+const SAMPLE = "";
 
 function bytesLabel(size: number) {
   if (size < 1024) return size + " B";
