@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Activity, ArrowRight, BookOpen, Braces, Check, ChevronDown, CircleHelp, Code2, FileCode2, FileText, FolderOpen, Layers3, LoaderCircle, Plus, Settings2, ShieldCheck, Sparkles, UploadCloud, X } from "lucide-react";
 import type { AnalysisResult } from "@/lib/api";
+import { Button } from "@/components/ui/button";
 import { getJob, submitAnalysis } from "@/lib/api";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
@@ -109,7 +110,7 @@ export default function Home() {
               <div className="editor-status"><span><i/> Editor ready</span><span>UTF-8 · LF · {language.toUpperCase()}</span></div>
               <input ref={inputRef} type="file" multiple className="hidden" accept=".py,.pyi,.js,.jsx,.ts,.tsx,.java,.go,.rs,.sql,.json,.yaml,.yml,.md,.txt,.zip,.html,.css,.sh,.ipynb,.rb,.php,.cs,.cpp,.c,.h,.tf" onChange={(event) => { if (event.target.files) addFiles(event.target.files); event.target.value = ""; }}/>
               {files.length > 0 && <div className="files"><div className="files-title">ATTACHED FILES <b>{files.length}</b><button onClick={() => setFiles([])}>Remove all</button></div><div className="file-list">{files.map((file) => <div className="file-pill" key={file.name + file.size}><FileCode2 size={14}/><span>{file.name}</span><small>{bytesLabel(file.size)}</small><button onClick={() => setFiles((old) => old.filter((item) => item !== file))}><X size={13}/></button></div>)}</div><small className="total-files">{files.length} files · {bytesLabel(totalSize)}</small></div>}
-              <div className="editor-bottom"><span><ShieldCheck size={14}/> Source is analyzed as text, never executed.</span><button onClick={runAnalysis} disabled={busy}>{busy ? <LoaderCircle className="spin" size={15}/> : <Sparkles size={15}/>} {busy ? "Analyzing…" : "Understand this code"} <ArrowRight size={15}/></button></div>
+              <div className="editor-bottom"><span><ShieldCheck size={14}/> Source is analyzed as text, never executed.</span><Button onClick={runAnalysis} disabled={busy} className="analyze-action">{busy ? <LoaderCircle className="spin" size={15}/> : <Sparkles size={15}/>} {busy ? "Analyzing…" : "Understand this code"} <ArrowRight size={15}/></Button></div>
             </section>
             <aside className="settings-card">
               <div className="settings-heading"><div className="setting-icon"><Sparkles size={16}/></div><div><b>Analysis settings</b><small>Tailor your code walkthrough</small></div><Settings2 size={15}/></div>

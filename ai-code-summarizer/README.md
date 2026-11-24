@@ -3,7 +3,7 @@
 A developer-facing application for understanding pasted code, individual source files, and complete projects.
 
 ## Product features
-- Direct code paste in Monaco Editor with syntax highlighting.
+- Direct code paste in a Monaco Editor with syntax highlighting.
 - Multiple file uploads, drag-and-drop, and ZIP project ingestion.
 - Per-file and project-level explanations with source metrics and Python symbols/imports.
 - Background analysis with Celery/Redis and job-status polling.
@@ -11,7 +11,7 @@ A developer-facing application for understanding pasted code, individual source 
 - Submitted source is treated as untrusted data and is never executed.
 
 ## Stack
-Next.js + TypeScript + Tailwind CSS + Monaco Editor; FastAPI; Celery + Redis; configurable OpenAI-compatible LLM endpoint; Docker Compose.
+Next.js 16 + React 19 + TypeScript + Tailwind CSS 4 + shadcn-style UI primitives + Monaco Editor; FastAPI; Celery + Redis; configurable OpenAI-compatible LLM endpoint; Docker Compose.
 
 ## Run locally
 1. Copy .env.example to .env.
